@@ -48,6 +48,17 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_header("Content-type", 'text/html')
             self.end_headers()
             self.wfile.write(bytes("<h1> error 404 </h1> <p> the server couldn't find what you were looking for</p>", "utf-8"))
+if __name__ == "__main__":        
+    webServer = HTTPServer((hostName, serverPort), MyServer)
+    print("Server started http://%s:%s" % (hostName, serverPort))
+
+    try:
+        webServer.serve_forever()
+    except KeyboardInterrupt:
+        pass
+
+    webServer.server_close()
+    print("Server stopped.")
             
 
             
